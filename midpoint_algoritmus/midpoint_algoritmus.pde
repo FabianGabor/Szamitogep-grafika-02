@@ -42,16 +42,34 @@ void meredeksegAlacsony(int x0, int y0, int x1, int y1) {
   for (int x = x0; x < x1; x++) {
     point(x,y);
     if (D > 0) {
-      y = y + yi;
-      D = D + (2 * (dy - dx)); // d + deltaNE      
+      y += yi;
+      D += (2 * (dy - dx)); // d + deltaNE      
     } else {
-      D = D + 2*dy; // d + deltaE
+      D += 2*dy; // d + deltaE
     }
   } 
 }
 
 void meredeksegMagas(int x0, int y0, int x1, int y1) {
-
+  int dx = x1 - x0;
+  int dy = y1 - y0;
+  int xi = 1;
+  if (dx < 0) {
+    xi = -1;
+    dx = -dx;
+  }
+  int D = 2 * dx - dy;
+  int x = x0;
+  
+  for (int y = y0; y < y1; y++) {
+    point(x,y);
+    if (D > 0) {
+      x += xi;
+      D += (2 * (dx - dy)); // d + deltaNE 
+    } else {
+      D += 2 * dx;
+    }    
+  }
 }
 
 void plotLine(int x0, int y0, int x1, int y1) {
@@ -74,7 +92,7 @@ void mousePressed() {
   countClicks++;
 
   if (countClicks % 2 == 0) {
-    szakaszMidpoint(prevMouseX, prevMouseY, mouseX, mouseY);    
+    plotLine(prevMouseX, prevMouseY, mouseX, mouseY);    
     countClicks = 0;
   } else {
     background(204); // töröljük a képernyőt
