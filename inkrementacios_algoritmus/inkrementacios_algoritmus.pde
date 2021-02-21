@@ -11,7 +11,7 @@ void draw() {
 void szakaszInkrementacios(float xA, float yA, float xB, float yB) {
   float m;
   float x, y;
-    
+  
   circle(xA, yA, 2);
   circle(xB, yB, 2);
   
@@ -32,7 +32,9 @@ void szakaszInkrementacios(float xA, float yA, float xB, float yB) {
       }
     }
   } else {    // függőleges
-    
+    for (y = (yA < yB) ? yA : yB; y < ((yA > yB) ? yA : yB); y++) {
+      point(xA,y);
+    }
   }
 }
 
